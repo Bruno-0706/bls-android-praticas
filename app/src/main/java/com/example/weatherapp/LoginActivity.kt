@@ -108,6 +108,17 @@ fun LoginPage(modifier: Modifier = Modifier) {
             ) {
                 Text("Limpar")
             }
+            Button(
+                onClick = {
+                    activity.startActivity(
+                        Intent(activity, RegisterActivity::class.java).setFlags(
+                            FLAG_ACTIVITY_SINGLE_TOP
+                        )
+                    )
+                },
+            ) {
+                Text("Registro")
+            }
         }
     }
 }
