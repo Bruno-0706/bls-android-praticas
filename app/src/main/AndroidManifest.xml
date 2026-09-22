@@ -35,6 +35,18 @@
             android:label="@string/title_activity_register"
             android:theme="@style/Theme.WeatherApp"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".FavoritesPage"
+            android:exported="false"
+            android:label="@string/title_activity_favorites_page"
+            android:theme="@style/Theme.WeatherApp"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.MapPage"
+            android:exported="false"
+            android:label="@string/title_activity_map_page"
+            android:theme="@style/Theme.WeatherApp"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
