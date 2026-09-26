@@ -32,10 +32,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.weatherapp.model.City
+import com.example.weatherapp.model.MainViewModel
+
 
 @Composable
-fun ListPage(modifier: Modifier = Modifier) {
-    val cityList = remember { getCities().toMutableList() }
+fun ListPage(modifier: Modifier = Modifier,
+             viewModel: MainViewModel) {
+    val cityList = viewModel.cities
     val activity = LocalActivity.current as Activity
     LazyColumn(
         modifier = modifier.fillMaxSize()
@@ -45,7 +48,7 @@ fun ListPage(modifier: Modifier = Modifier) {
         items(cityList, key = { it.name }) { city ->
             CityItem(city = city, onClose = {
                 /* Coiso pa fazer */
-                Toast.makeText(activity, "Toast de saída?", Toast.LENGTH_LONG).show()
+                viewModel.remove(city)
             }, onClick = {
                 /* Coiso pa fazer */
                 Toast.makeText(activity, "Clicado Toast?", Toast.LENGTH_LONG).show()
@@ -54,9 +57,9 @@ fun ListPage(modifier: Modifier = Modifier) {
     }
 }
 
-private fun getCities() = List(20) { i->
-    City(name = "Cidade $i", weather = "Carregando clima...")
-}
+//private fun getCities() = List(20) { i->
+//    City(name = "Cidade $i", weather = "Carregando clima...")
+//}
 
 @Composable
 fun CityItem(
