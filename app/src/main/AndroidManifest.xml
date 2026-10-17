@@ -5,7 +5,7 @@
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 
-    <application
+    <application android:name=".WeatherApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -19,6 +19,7 @@
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.WeatherApp"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,25 +32,29 @@
             android:exported="true"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.WeatherApp"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleTask" />
         <activity
             android:name=".RegisterActivity"
             android:exported="false"
             android:label="@string/title_activity_register"
             android:theme="@style/Theme.WeatherApp"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleTask" />
         <activity
             android:name=".FavoritesPage"
             android:exported="false"
             android:label="@string/title_activity_favorites_page"
             android:theme="@style/Theme.WeatherApp"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleTask" />
         <activity
             android:name=".ui.MapPage"
             android:exported="false"
             android:label="@string/title_activity_map_page"
             android:theme="@style/Theme.WeatherApp"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleTask" />
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
 
