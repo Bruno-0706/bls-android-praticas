@@ -25,6 +25,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.weatherapp.model.MainViewModel
@@ -35,6 +36,7 @@ import com.example.weatherapp.ui.nav.BottomNavBar
 import com.example.weatherapp.ui.nav.BottomNavItem
 import com.example.weatherapp.ui.nav.MainNavHost
 import androidx.navigation.NavDestination.Companion.hasRoute
+import com.example.weatherapp.model.User
 import com.example.weatherapp.ui.nav.Route
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
@@ -62,7 +64,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     topBar = {
                         TopAppBar(
-                            title = { Text("Bem-vindo/a!") },
+                            title = { Text("Bem-vindo/a, ${viewModel.user?.name ?: ""}") },
                             actions = {
                                 IconButton( onClick = {
                                     Firebase.auth.signOut()
