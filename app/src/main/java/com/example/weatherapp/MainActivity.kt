@@ -39,8 +39,11 @@ import com.example.weatherapp.ui.nav.MainNavHost
 import androidx.navigation.NavDestination.Companion.hasRoute
 import com.example.weatherapp.api.WeatherService
 import com.example.weatherapp.db.fb.FBDatabase
+import com.example.weatherapp.model.City
 import com.example.weatherapp.model.MainViewModelFactory
 import com.example.weatherapp.model.User
+import com.example.weatherapp.ui.CityDialogViewModel
+import com.example.weatherapp.ui.CityDialogViewModelFactory
 import com.example.weatherapp.ui.nav.Route
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
@@ -57,6 +60,9 @@ class MainActivity : ComponentActivity() {
             val viewModel : MainViewModel = viewModel(
                 factory = MainViewModelFactory(fbDB, weatherService)
             )
+            val cityDialogViewModel : CityDialogViewModel = viewModel(
+                factory = CityDialogViewModelFactory(weatherService)
+            )
             val navController = rememberNavController()
             //val viewModel : MainViewModel by viewModels()
             var showDialog by remember { mutableStateOf(false) }
@@ -69,7 +75,9 @@ class MainActivity : ComponentActivity() {
                     onConfirm = { city ->
                         if (city.isNotBlank()) viewModel.addCity(city)
                         showDialog = false
-                    })
+                    },
+                    viewModel = cityDialogViewModel
+                )
                 Scaffold(
                     topBar = {
                         TopAppBar(
@@ -97,7 +105,9 @@ class MainActivity : ComponentActivity() {
                     },
                     floatingActionButton = {
                         if (showButton) {
-                            FloatingActionButton(onClick = { showDialog = true }) {
+                            FloatingActionButton(onClick = { cityDialogViewModel.onQueryChanged("")
+                                showDialog = true
+                            }) {
                                 Icon(Icons.Default.Add, contentDescription = "Adicionar")
                             }
                         }
