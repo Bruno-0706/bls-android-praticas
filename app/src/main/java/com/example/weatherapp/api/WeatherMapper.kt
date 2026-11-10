@@ -1,0 +1,12 @@
+package com.example.weatherapp.api
+
+import com.example.weatherapp.model.Weather
+
+fun APICurrentWeather.toWeather() : Weather {
+    return Weather (
+        date = current?.last_updated ?: "...",
+        desc = current?.condition?.text ?: "...",
+        temp = current?.temp_c ?: -1.0,
+        imgUrl = "https:" + current?.condition?.icon
+    )
+}
