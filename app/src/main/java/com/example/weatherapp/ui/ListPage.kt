@@ -46,14 +46,13 @@ fun ListPage(modifier: Modifier = Modifier,
             .fillMaxSize()
             .padding(8.dp)
     ) {
-        items(cityList, key = { it.name }) { city ->
-            CityItem(city = city, weather = viewModel.weather(city.name), onClose = {
-                /* Coiso pa fazer */
-                viewModel.remove(city)
-            }, onClick = {
-                /* Coiso pa fazer */
-                Toast.makeText(activity, "Clicado Toast?", Toast.LENGTH_LONG).show()
-            })
+        items(cityList) { city ->
+            CityItem(
+                city = city,
+                weather = viewModel.weather(city.name),
+                onClick = { viewModel.city = city.name },
+                onClose = { viewModel.remove(city) }
+            )
         }
     }
 }
