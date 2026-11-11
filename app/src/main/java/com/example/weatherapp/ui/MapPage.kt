@@ -15,6 +15,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -66,35 +67,38 @@ fun MapPage(modifier: Modifier = Modifier,
         uiSettings = MapUiSettings(myLocationButtonEnabled = true)
     ) {
           viewModel.cities.forEach {
-              if (it.location != null) {
-                  val weather = viewModel.weather(it.name)
-                  val desc = if (weather == Weather.LOADING) "Carregando clima..."
-                            else weather.desc
-                  val marker = remember { MarkerState(position = it.location) }
-                  Marker(state = marker, title = it.name, snippet = desc)
+              key(it.name) {
+                  if (it.location != null) {
+                      val weather = viewModel.weather(it.name)
+                      val desc = if (weather == Weather.LOADING) "Carregando clima..."
+                      else weather.desc
+                      val marker = remember { MarkerState(position = it.location) }
+                      Marker(state = marker, title = it.name, snippet = desc)
+                  }
               }
           }
 
-          Marker(
-              state = recife,
-              title = "Recife",
-              snippet = "Marcador em Recife",
-              icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)
-          )
+//          Marker(
+//              state = recife,
+//              title = "Recife",
+//              snippet = "Marcador em Recife",
+//              icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)
+//          )
 
-          Marker(
-              state = caruaru,
-              title = "Caruaru",
-              snippet = "Marcaador em Caruaru",
-              icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)
-          )
+//          Marker(
+//              state = caruaru,
+//              title = "Caruaru",
+//              snippet = "Marcaador em Caruaru",
+//              icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)
+//          )
 
-          Marker(
-              state = joaopessoa,
-              title = "João Pessoa",
-              snippet = "Marcador em João Pessoa",
-              icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)
-          )
+//          Marker(
+//              state = joaopessoa,
+//              title = "João Pessoa",
+//              snippet = "Marcador em João Pessoa",
+//              icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)
+//          )
+
 //        Text(
 //            text = "Map",
 //            fontWeight = FontWeight.Bold,

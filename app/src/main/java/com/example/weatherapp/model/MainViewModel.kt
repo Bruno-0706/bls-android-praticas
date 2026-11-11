@@ -1,5 +1,7 @@
 package com.example.weatherapp.model
 
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
@@ -20,8 +22,10 @@ class MainViewModel(private val db: FBDatabase, private val service : WeatherSer
 
     private val _cities = mutableStateMapOf<String, City>()
 
-    val cities : List<City>
-        get() = _cities.values.toList().sortedBy { it.name }
+    val cities : List<City> by derivedStateOf {
+        _cities.values.toList().sortedBy { it.name }
+    }
+
     private val _weather = mutableStateMapOf<String, Weather>()
 
     private val _user = mutableStateOf<User?>(null)
