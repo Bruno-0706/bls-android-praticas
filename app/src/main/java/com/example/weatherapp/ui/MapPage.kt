@@ -28,6 +28,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getDrawable
+import androidx.core.graphics.drawable.toBitmap
+import androidx.core.graphics.scale
+import com.example.weatherapp.R
 import com.example.weatherapp.model.MainViewModel
 import com.example.weatherapp.model.Weather
 import com.google.android.gms.maps.model.BitmapDescriptor
@@ -70,10 +74,14 @@ fun MapPage(modifier: Modifier = Modifier,
               key(it.name) {
                   if (it.location != null) {
                       val weather = viewModel.weather(it.name)
+                      val image = weather.bitmap ?: getDrawable(context, R.drawable.loading)!!.toBitmap()
+                      val icon = BitmapDescriptorFactory
+                          .fromBitmap(image.scale(120,120))
                       val desc = if (weather == Weather.LOADING) "Carregando clima..."
                       else weather.desc
-                      val marker = remember { MarkerState(position = it.location) }
-                      Marker(state = marker, title = it.name, snippet = desc)
+                      val marker = remember { MarkerState(position = it.location)
+                      }
+                      Marker(icon = icon, state = marker, title = it.name, snippet = desc)
                   }
               }
           }
